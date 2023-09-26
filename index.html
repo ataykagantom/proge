@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק ראיונות מקוונים</title>
+</head>
+<body>
+    <h1>משחק ראיונות מקוונים - ערוך ראיון</h1>
+
+    <h2>צור ראיון חדש</h2>
+    <form id="interviewForm">
+        <label for="intervieweeName">שם הנציג:</label>
+        <input type="text" id="intervieweeName" required><br>
+        <label for="interviewQuestions">שאלות לראיון:</label>
+        <textarea id="interviewQuestions" rows="4" required></textarea><br>
+        <button type="submit">צור ראיון</button>
+    </form>
+
+    <hr>
+
+    <h2>ראיונות שנערכו</h2>
+    <ul id="interviewList"></ul>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const interviewForm = document.getElementById("interviewForm");
+            const intervieweeNameInput = document.getElementById("intervieweeName");
+            const interviewQuestionsInput = document.getElementById("interviewQuestions");
+            const interviewList = document.getElementById("interviewList");
+
+            interviewForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const intervieweeName = intervieweeNameInput.value;
+                const interviewQuestions = interviewQuestionsInput.value.split('\n');
+
+                // צור את הראיון והוסף אותו לרשימה
+                const interview = document.createElement("li");
+                interview.innerHTML = `<strong>${intervieweeName}</strong><br>${interviewQuestions.join('<br>')}`;
+                interviewList.appendChild(interview);
+
+                // נקה את השדות ליצירת ראיון חדש
+                intervieweeNameInput.value = "";
+                interviewQuestionsInput.value = "";
+            });
+        });
+    </script>
+</body>
+</html>
 
